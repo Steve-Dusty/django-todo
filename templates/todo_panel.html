@@ -1,15 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Todo Panel</h1>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Add">
-</form>    
 
-{% for task in tasks %}
-    {{ task }}
-{% endfor %}
+<div class="text-center">
 
+    <h1>Todo Panel</h1>
+    <p>Click on each task to mark as complete</p>
+
+    <!-- Render the form here-->
+
+    <form action="{% url 'addTask' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>    
+    <a type="submit" class="btn btn-warning" href="{% url 'clearAll' %}" role="button">Clear</a>
+
+
+    <!-- Display the todos here -->
+
+    <ul class="list-group text-center">
+    {% for task in tasks %}
+        {% if task.is_completed %}  
+            <div class="btn-group">
+                <a href="{% url 'deleteTask' task.id %}"><button type="button" class="btn btn-secondary">Delete</button></a>
+                <a href="{% url 'toggleTask' task.id %}" style="text-decoration: line-through; color: black;">
+                    <li class="list-group-item list-group-item-secondary">
+                        {{ task }}
+                    </li>
+                </a>  
+            </div>
+        {% else %}
+            <div class="btn-group">
+                <a href="{% url 'deleteTask' task.id %}"><button type="button" class="btn btn-secondary">Delete</button></a>
+                <a href="{% url 'toggleTask' task.id %}" style="text-decoration: none;">
+                    <li class="list-group-item">
+                        {{ task }} 
+                    </li>
+                </a>
+            </div>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</div>
 {% endblock content %}
