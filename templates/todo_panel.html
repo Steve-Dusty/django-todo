@@ -18,29 +18,20 @@
 
 
     <!-- Display the todos here -->
-
-    <ul class="list-group text-center">
-    {% for task in tasks %}
-        {% if task.is_completed %}  
-            <div class="btn-group">
-                <a href="{% url 'deleteTask' task.id %}"><button type="button" class="btn btn-secondary">Delete</button></a>
-                <a href="{% url 'toggleTask' task.id %}" style="text-decoration: line-through; color: black;">
-                    <li class="list-group-item list-group-item-secondary">
-                        {{ task }}
-                    </li>
-                </a>  
-            </div>
-        {% else %}
-            <div class="btn-group">
-                <a href="{% url 'deleteTask' task.id %}"><button type="button" class="btn btn-secondary">Delete</button></a>
-                <a href="{% url 'toggleTask' task.id %}" style="text-decoration: none;">
-                    <li class="list-group-item">
-                        {{ task }} 
-                    </li>
-                </a>
-            </div>
-        {% endif %}
-    {% endfor %}
-    </ul>
-</div>
+        
+        <ul class="list-group p-5">
+            {% for task in tasks %}
+                {% if task.is_completed %}
+            <li class="list-group-item d-flex"><p class="p-0 m-0 flex-grow-1" style="text-decoration: line-through;">{{ task }}</p> 
+                <a type="submit" class="btn btn-info" href="{% url 'toggleTask' task.id %}" role="button">Toggle</a>
+                <a type="submit" class="btn btn-danger" href="{% url 'deleteTask' task.id %}" role="button">Delete</a>
+            </li>
+                {% else %}
+            <li class="list-group-item d-flex"><p class="p-0 m-0 flex-grow-1">{{ task }}</p>  
+                <a type="submit" class="btn btn-info" href="{% url 'toggleTask' task.id %}" role="button">Toggle</a>
+                <a type="submit" class="btn btn-danger" href="{% url 'deleteTask' task.id %}" role="button">Delete</a>
+             </li> 
+             {% endif %}
+             {% endfor %}
+        </ul>
 {% endblock content %}
