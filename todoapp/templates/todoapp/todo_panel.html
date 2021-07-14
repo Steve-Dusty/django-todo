@@ -7,8 +7,12 @@
     <h1>Todo Panel</h1>
     <p>Click on each task to mark as complete</p>
 
+    {% if messages %} 
+        {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
     <!-- Render the form here-->
-
     <form action="{% url 'addTask' %}" method="POST">
         {% csrf_token %}
         {{ form }}

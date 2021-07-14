@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Todo
 from .forms import TodoForm
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 
 
 def index(request):
@@ -22,10 +23,13 @@ def todoPanel(request):
 def addTask(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
-
         if form.is_valid():
-            task = Todo(task=form.cleaned_data['task'])
-            task.save()
+            if Todo.objects.filter(task=form.cleaned_data['task']).exists() == False:
+                task = Todo(task=form.cleaned_data['task'])
+                task.save()
+            else:
+                messages.error(request, 'Cannot add duplicate task')
+                return redirect('panel')
 
         return redirect('panel')
 
