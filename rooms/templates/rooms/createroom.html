@@ -1,0 +1,23 @@
+{% extends 'rooms/base.html' %}
+
+{% block content %}
+
+{% if messages %}
+
+    {% for message in messages %}
+        <ul class="messages">
+            <li class="alert alert-danger" role="alert">{{ message }}</li>
+        </ul>
+    {% endfor %}
+
+{% endif %}
+
+
+<form id="codeform" action="{% url 'createRoom' %}" method="POST">
+    {% csrf_token %}
+    <label for="room_code">Room code: </label>
+    <input id="room_code" type="text" name="room_code">
+    <input type='submit' value='Create Room' class='btn btn-primary'/>
+</form>
+
+{% endblock content %}
