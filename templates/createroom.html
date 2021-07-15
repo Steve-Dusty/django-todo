@@ -1,4 +1,4 @@
-{% extends 'rooms/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -15,9 +15,9 @@
 
 <form id="codeform" action="{% url 'createRoom' %}" method="POST">
     {% csrf_token %}
-    <label for="room_code">Room code: </label>
-    <input id="room_code" type="text" name="room_code">
-    <input type='submit' value='Create Room' class='btn btn-primary'/>
+    <label for="room_code">Enter your desired room code: </label> <br>
+    <input id="room_code" type="text" name="room_code" maxlength="60"> 
+    <input type='submit' value='Create Room' class="btn btn-outline-success"/>
 </form>
 
 {% endblock content %}

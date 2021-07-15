@@ -1,11 +1,11 @@
-{% extends 'todoapp/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
 <div class="text-center">
 
     <h1>Todo Panel</h1>
-    <p>Click on each task to mark as complete</p>
+    <p>Click on the toggle button to mark task as complete and delete button to delete the task.</p>
 
     {% if messages %} 
         {% for message in messages %}
@@ -13,12 +13,12 @@
         {% endfor %}
     {% endif %}
     <!-- Render the form here-->
-    <form action="{% url 'addTask' %}" method="POST">
+    <form action="{% url 'addTask' room_code %}" method="POST">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="btn btn-success">Add</button>
     </form>    
-    <a type="submit" class="btn btn-warning" href="{% url 'clearAll' %}" role="button">Clear</a>
+    <a type="submit" class="btn btn-warning" href="{% url 'clearAll' room_code %}" role="button">Clear</a>
 
 
     <!-- Display the todos here -->
@@ -27,13 +27,13 @@
             {% for task in tasks %}
                 {% if task.is_completed %}
             <li class="list-group-item d-flex" style="background-color: #D3D3D3"><p class="p-0 m-0 flex-grow-1" style="text-decoration: line-through;">{{ task }}</p> 
-                <a type="submit" class="btn btn-info" href="{% url 'toggleTask' task.id %}" role="button">Toggle</a>
-                <a type="submit" class="btn btn-danger" href="{% url 'deleteTask' task.id %}" role="button">Delete</a>
+                <a type="submit" class="btn btn-info" href="{% url 'toggleTask' room_code task.id %}" role="button">Toggle</a>
+                <a type="submit" class="btn btn-danger" href="{% url 'deleteTask' room_code task.id %}" role="button">Delete</a>
             </li>
                 {% else %}
             <li class="list-group-item d-flex"><p class="p-0 m-0 flex-grow-1">{{ task }}</p>  
-                <a type="submit" class="btn btn-info" href="{% url 'toggleTask' task.id %}" role="button">Toggle</a>
-                <a type="submit" class="btn btn-danger" href="{% url 'deleteTask' task.id %}" role="button">Delete</a>
+                <a type="submit" class="btn btn-info" href="{% url 'toggleTask' room_code task.id %}" role="button">Toggle</a>
+                <a type="submit" class="btn btn-danger" href="{% url 'deleteTask' room_code task.id %}" role="button">Delete</a>
              </li> 
              {% endif %}
              {% endfor %}

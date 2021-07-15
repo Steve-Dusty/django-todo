@@ -1,8 +1,8 @@
 from django.urls import path, include
-from . import views
+from .views import createRoom
 
 urlpatterns = [
-    path('<str:room_code>', views.todoRoom, name='todoRoom'),
-    path('createroom/', views.createRoom, name='createRoom'),
+
+    path('createroom/', createRoom, name='createRoom'),
 
 ]

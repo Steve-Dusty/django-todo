@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import CodeForm
 from .models import Code
+from todoapp.models import Todo
 from django.contrib import messages
 
 
@@ -13,7 +14,7 @@ def createRoom(request):
                 form = CodeForm()
                 messages.error(
                     request, 'Room code already exists. Choose a new one.')
-                return render(request, 'rooms/createroom.html', {'form': form})
+                return render(request, 'createroom.html', {'form': form})
             code = Code(room_code=form.cleaned_data['room_code'])
             code.save()
             return redirect('/room/' + form.cleaned_data['room_code'])
@@ -22,13 +23,15 @@ def createRoom(request):
 
     context = {'form': form}
 
-    return render(request, 'rooms/createroom.html', context)
+    return render(request, 'createroom.html', context)
 
 
+"""
 def todoRoom(request, room_code):
     codes = Code.objects.all()
     if Code.objects.filter(room_code=room_code).exists():
         context = {'codes': codes, 'room_code': room_code}
-        return render(request, 'rooms/todolist.html', context)
+        return render(request, 'todo_panel.html', context)
     else:
         return redirect('/')
+"""

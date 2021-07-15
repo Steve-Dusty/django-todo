@@ -1,3 +1,6 @@
+body {
+    background: #add8e6;
+}
 
 #codeform {
     position: fixed;
@@ -9,3 +12,10 @@
 .alert {
     list-style-type: none;
 }
+
+input[name="room_code"] {
+    height: 40px;
+    width: 300px;
+    font-size: 1rem;
+}
+
