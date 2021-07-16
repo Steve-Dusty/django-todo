@@ -3,6 +3,6 @@ from .views import createRoom, joinRoom
 
 urlpatterns = [
 
-    path('createroom/', createRoom, name='createRoom'),
+    path('', createRoom, name='createRoom'),
     path('joinRoom/', joinRoom, name='joinRoom'),
 ]
