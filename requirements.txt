@@ -1,0 +1,5 @@
+django==3.2.5
+whitenoise
+environs
+psycopog2-binary
+gunicorn 
