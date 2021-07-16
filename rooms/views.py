@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CodeForm
+from .forms import CodeForm, JoinRoomForm
 from .models import Code
 from todoapp.models import Todo
 from django.contrib import messages
@@ -26,12 +26,20 @@ def createRoom(request):
     return render(request, 'createroom.html', context)
 
 
-"""
-def todoRoom(request, room_code):
-    codes = Code.objects.all()
-    if Code.objects.filter(room_code=room_code).exists():
-        context = {'codes': codes, 'room_code': room_code}
-        return render(request, 'todo_panel.html', context)
+def joinRoom(request):
+    if request.method == 'POST':
+        form = JoinRoomForm(request.POST)
+
+        if form.is_valid():
+            if Code.objects.filter(room_code=form.cleaned_data['room_code']).exists():
+                return redirect('/room/' + form.cleaned_data['room_code'])
+
+            else:
+                messages.error(
+                    request, 'Room code does not exist.'
+                )
+                print(form.cleaned_data['room_code'])
+                return redirect('/')
+
     else:
         return redirect('/')
-"""

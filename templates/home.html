@@ -7,8 +7,29 @@
     <h1 class="display-4">Todo App</h1>
     <p class="lead">This is a simple todo app that can help you keep track of your todos.</p>
     <p class="lead">
-        <a class="btn btn-primary btn-lg" href="/room/createroom">Create a new todo list</a>
-    </p>
+        <a class="btn btn-primary btn-lg" href="/room/createroom">Create a new todo list</a> <br> <br>
+        <a><em>Or you can...</em></a>
+    </p> 
+    
+
+    <form action="{% url 'joinRoom' %}" method='POST'>
+        {% csrf_token %}
+        <input type="text" class="input-room-code" name="room_code" placeholder="Room code here...">
+        <span>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </span> 
+    </form>
+    {% if messages %}
+        {% for message in messages %}
+            <p class="text-danger" role="alert">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <br>
+
+    <p><i><b>How it works</b>: Create a memorable room code. Write your tasks. Next time when you come back, you can
+        see your tasks by simply inputting the room code.</i></p>
 </div>
 
 {% endblock content %}

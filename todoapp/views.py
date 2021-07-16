@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Todo
 from rooms.models import Code
 from .forms import TodoForm
-from rooms.forms import CodeForm
+from rooms.forms import CodeForm, JoinRoomForm
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 

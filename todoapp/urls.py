@@ -9,5 +9,6 @@ urlpatterns = [
          views.toggleTask, name='toggleTask'),
     path('room/<str:room_code>/deleteTask/<int:task_id>',
          views.deleteTask, name='deleteTask'),
-    path('room/<str:room_code>/clearAll', views.clearAll, name='clearAll')
+    path('room/<str:room_code>/clearAll', views.clearAll, name='clearAll'),
+
 ]
