@@ -2,3 +2,5 @@ django==3.2.5
 whitenoise
 environs
 gunicorn 
+dj-database-url
+psycopg2-binary
